@@ -1,4 +1,4 @@
-# Guideline to setup and run the script?
+# Guideline to setup and run the script
 
 This repository provides an offline voice-based chatbot. 
 It uses a locally hosted LLM via Ollama, Vosk for speech recognition, and Coqui TTS for speech synthesis. 
@@ -49,3 +49,4 @@ Speak naturally. The assistant will reply in speech and text.
 
 - On first launch, Coqui TTS will download its model (e.g., `tts_models/en/ljspeech/tacotron2-DDC`).
 - After that, all speech synthesis occurs offline.
+
