@@ -6,17 +6,17 @@ The environment and dependencies are managed by **uv**.
 
 ## Installation
 
-### 1. Install uv
+### 1. For Windows, install uv via
 ```bash
-python3 -m pip install uv
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
 ```
-Alternatively, using pipx:
+For Linux or macOS, install uv via:
 ```bash
-pipx install uv
+curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
 ### 2. Install Ollama and Pull an LLM
-1. Install the Ollama CLI following the official guide.  
+1. Install the Ollama CLI following the official guide on `https://ollama.com/download`.  
 2. Start the Ollama daemon:
    ```bash
    ollama serve
@@ -49,4 +49,5 @@ Speak naturally. The assistant will reply in speech and text.
 
 - On first launch, Coqui TTS will download its model (e.g., `tts_models/en/ljspeech/tacotron2-DDC`).
 - After that, all speech synthesis occurs offline.
+
 
