@@ -18,7 +18,7 @@ client = Client(host="http://127.0.0.1:11434")
 
 # --- Initialize Vosk speech recognizer ---
 SetLogLevel(0)
-vosk_model = Model("vosk-model-small-en-us-0.15")
+vosk_model = Model("vosk-model-en-us-0.22-lgraph")
 recognizer = KaldiRecognizer(vosk_model, 16000)
 
 pa = pyaudio.PyAudio()
@@ -68,12 +68,13 @@ def converse():
 
         # Call Ollama locally
         response = client.chat(
-            model="sea_turtle_llama32_3b_q4_k_m_v4",  # Specify the model to use
+            model="sea_turtle_llama3_1_8b_q4_k_m",  # Specify the model to use
             messages=[
-                {"role": "system",   "content": "You are a helpful assistant."},
+                {"role": "system",   "content": "You are a highly factual and accurate AI assistant for anything related to sea turtles. Do not invent information or speculate. If information is not available, indicate that."},
                 *history,
-                {"role": "user",     "content": user_text}
-            ]
+                {"role": "user",     "content": user_text},
+            ],
+            options={"temperature": 0.8},
         )
         reply = response.message.content
         print(f"Assistant: {reply}")

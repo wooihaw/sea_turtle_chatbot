@@ -11,3 +11,4 @@ wheels/
 
 # vosk model
 vosk-model-small-en-us-0.15/
+vosk-model-en-us-0.22-lgraph/
