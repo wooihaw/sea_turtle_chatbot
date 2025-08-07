@@ -71,7 +71,7 @@ def converse():
                 *history,
                 {"role": "user",     "content": user_text},
             ],
-            options={"temperature": 0.8},
+            options={"temperature": 0.2},
         )
         reply = response.message.content
         print(f"Assistant: {reply}")
