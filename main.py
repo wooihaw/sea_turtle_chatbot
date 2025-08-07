@@ -7,8 +7,9 @@ from vosk import Model, KaldiRecognizer, SetLogLevel
 import pyaudio
 
 # Offline TTS
-# import pyttsx3
-from TTS.api import TTS
+from kittentts import KittenTTS
+
+# sounddevice for audio playback
 import sounddevice as sd
 
 # Ollama Python client
@@ -21,6 +22,9 @@ SetLogLevel(0)
 vosk_model = Model("vosk-model-en-us-0.22-lgraph")
 recognizer = KaldiRecognizer(vosk_model, 16000)
 
+# --- Initialize KittenTTS model ---
+ktts = KittenTTS("KittenML/kitten-tts-nano-0.1")
+
 pa = pyaudio.PyAudio()
 stream = pa.open(
     format=pyaudio.paInt16,
@@ -31,11 +35,7 @@ stream = pa.open(
 )
 stream.start_stream()
 
-# --- Initialize pyttsx3 TTS engine ---
-# tts_engine = pyttsx3.init()
-# Download a pretrained model (e.g., "tts_models/en/ljspeech/tacotron2-DDC")
-tts = TTS(model_name="tts_models/en/ljspeech/tacotron2-DDC")
-
+# --- Functions for speech recognition---
 def listen_and_recognize():
     """Capture audio from microphone and return transcribed text."""
     print("Listening…")
@@ -47,12 +47,11 @@ def listen_and_recognize():
             if text:
                 return text
 
+# --- Functions for TTS ---
 def speak(text: str):
     """Speak the given text aloud."""
-    # tts_engine.say(text)
-    # tts_engine.runAndWait()
-    wav = tts.tts(text)
-    sd.play(wav, samplerate=tts.synthesizer.output_sample_rate)
+    wav = ktts.generate(text + "...", voice='expr-voice-2-f')
+    sd.play(wav, samplerate=24000)
     sd.wait()
 
 def converse():
