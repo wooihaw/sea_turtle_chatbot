@@ -69,11 +69,11 @@ def converse():
         response = client.chat(
             model="sea_turtle_llama3_1_8b_q4_k_m",  # Specify the model to use
             messages=[
-                {"role": "system",   "content": "You are a highly factual and accurate AI assistant for anything related to sea turtles. Do not invent information or speculate. If information is not available, indicate that."},
+                {"role": "system",   "content": "You are a highly factual and accurate AI assistant for anything related to sea turtles. Do not invent information or speculate. If information is not available, indicate that. Always respond with single-sentence answer with not more than 30 words."},
                 *history,
                 {"role": "user",     "content": user_text},
             ],
-            options={"temperature": 0.8},
+            options={"temperature": 0.2},
         )
         reply = response.message.content
         print(f"Assistant: {reply}")
